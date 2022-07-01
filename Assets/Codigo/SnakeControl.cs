@@ -19,6 +19,9 @@ public class SnakeControl : MonoBehaviour
     List<GameObject> Cuerpos = new List<GameObject>();
     List<Vector3> PositionHistory = new List<Vector3>();
     public Text Tiempo;
+    public Text txtTime;
+    public float customTime;
+    public Text txtTimeCustom;
     void Start()
     {
         textoPerdiste.SetActive(false);
@@ -28,7 +31,9 @@ public class SnakeControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Tiempo.text = ""+ Mathf.Floor(Time.time);
+        float elapsedTime = Time.timeSinceLevelLoad;
+        Tiempo.text = "" + elapsedTime.ToString();
+        customTime = 0;
         transform.position += transform.forward * moveSpeed * Time.deltaTime;
 
         float giroDireccion = Input.GetAxis("Horizontal");
@@ -73,9 +78,5 @@ public class SnakeControl : MonoBehaviour
             botonRepetir.SetActive(true);
         }
     }
-    public void Repetir()
-    {
-        Time.timeScale = 1;
-        SceneManager.LoadScene("SampleScene");
-    }
+    
 }
